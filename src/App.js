@@ -1,22 +1,39 @@
-
-import { useState } from 'react'
-
-import Button from '~/components/Button'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from '~/routes';
+import { DefaulLayout } from '~/components/Layout';
+import { Fragment } from 'react';
 
 function App() {
-  const [counter,setCounter] = useState(1)
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        
+                        const Page = route.component;
+                        let Layout = DefaulLayout
+                        if(route.layout){
+                            Layout = route.layout
+                        } else if(route.layout === null){
+                            Layout = Fragment
+                        }
 
-  const handleIncrease = () =>{
-    setCounter(prevState => prevState +1)
-  }
-
-  return (
-    <div className="App" style={{padding:20}}>
-      <Button />
-      <h1>{counter}</h1>
-      <button onClick={handleIncrease}>Increase</button>
-    </div>
-  );
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;

@@ -1,5 +1,10 @@
 .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
+    z-index: 10;
+    background-color: var(--white);
     height: var(--default-layout-header-hight);
     box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
     display: flex;
@@ -13,6 +18,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
 }
 
 .actions {
